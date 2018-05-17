@@ -27,9 +27,8 @@ def self.start
       for i in 0...strings.length do
         url, title = (strings[i][0].scan(%r{<a href="(.+?)".+?>(.+?)</a>}))[0]
         puts "#{title} #{url}"
+        csv << [keyword,title,url]
       end
-
-      csv << [keyword,title,url]
     end
   end
 end
