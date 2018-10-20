@@ -4,16 +4,7 @@ class Media
   require 'csv'
 
 def self.start
-  key_words = ["東京　ランチ",
-"新宿　ランチ",
-"渋谷　ランチ",
-"銀座　ランチ",
-"新宿　グルメ",
-"新宿　居酒屋",
-"新宿　個室　居酒屋",
-"渋谷　居酒屋",
-"渋谷　焼肉",
-"渋谷　ディナー"]
+  key_words = ["松本 観光","松本 そば","Ruby"]
 
   #CSVファイルへのヘッダー書き込み
   CSV.open("./result/media.csv","wb") do |csv|
@@ -31,11 +22,12 @@ def self.start
       end
 
       # <h3 class="r">-ここにはさまれた文字列-</h3>を集める
-      strings =  html.scan(%r{<h3 class="r">(.+?)</h3>})
+      strings =  html.scan(%r{div class="r">(.+?)</div>})
+      puts strings
 
       # <a>タグの中のhref属性とタイトルを抜き出す
       for i in 0...strings.length do
-        url, title = (strings[i][0].scan(%r{<a href="(.+?)".+?>(.+?)</a>}))[0]
+        url,ping ,title = (strings[i][0].scan(%r{<a href="(.+?)"(.+?)><h3 class="LC20lb">(.+?)</h3>}))[0]
         csv << [keyword,title,url]
       end
     end
