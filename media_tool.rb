@@ -4,7 +4,18 @@ class Media
   require 'csv'
 
 def self.start
-  key_words = ["松本 観光","松本 そば","Ruby"]
+  key_words = ["長野 お土産",
+               "小布施 お土産",
+               "安曇野 お土産",
+               "松本 お土産",
+               "塩尻 お土産",
+               "諏訪 お土産",
+               "上田 お土産",
+               "軽井沢 お土産",
+               "佐久 お土産",
+               "伊那 お土産",
+               "阿智村 お土産",
+               "木曽 お土産"]
 
   #CSVファイルへのヘッダー書き込み
   CSV.open("./result/media.csv","wb") do |csv|
@@ -21,7 +32,7 @@ def self.start
         f.read
       end
 
-      # <h3 class="r">-ここにはさまれた文字列-</h3>を集める
+      # <div class="r">-ここにはさまれた文字列-</div>を集める
       strings =  html.scan(%r{div class="r">(.+?)</div>})
       puts strings
 
